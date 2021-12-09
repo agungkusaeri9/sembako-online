@@ -48,6 +48,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.transactions.index') }}" class="nav-link">
+              <i class="nav-icon far fa-folder"></i>
+              <p>
+                Transaksi Masuk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.users.index') }}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>

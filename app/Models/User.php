@@ -44,4 +44,9 @@ class User extends Authenticatable
             return asset('storage/'.$this->avatar);
         }
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

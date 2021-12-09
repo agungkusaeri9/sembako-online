@@ -14,11 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/login', 301);
+Route::get('/','HomeController@index')->name('home');
+Route::get('/products', 'ProductController@index')->name('products.index');
+Route::post('add-to-cart', 'CartController@store')->name('carts.store');
+Route::get('/{slug}', 'ProductController@show')->name('products.show');
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','isadmin'])->group(function () {
     Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
         Route::get('/','DashboardController')->name('dashboard');
         Route::resource('products',ProductController::class);
@@ -26,5 +29,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('users',UserController::class);
         Route::get('profile','ProfileController@show')->name('profile');
         Route::post('profile','ProfileController@update')->name('profile.update');
+        Route::get('transactions', 'TransactionController@index')->name('transactions.index');
+        Route::delete('transactions/{id}', 'TransactionController@destroy')->name('transactions.destroy');
+        Route::get('transactions/set-status/{id}', 'TransactionController@setStatus')->name('transactions.set-status');
+        Route::get('transactions/{id}', 'TransactionController@show')->name('transactions.show');
     });
 });
