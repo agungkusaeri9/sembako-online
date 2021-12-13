@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Slider extends Model
 {
     protected $guarded = ['id'];
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
+    public function image(){
+        return asset('storage/'.$this->image);
     }
 }

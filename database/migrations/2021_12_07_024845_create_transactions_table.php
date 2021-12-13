@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string('email');
             $table->text('address');
             $table->integer('bank_id')->nullable();
+            $table->integer('courier_id')->nullable();
             $table->bigInteger('transaction_total');
             $table->enum('status',['FAILED','PENDING','SUCCESS'])->default('PENDING');
             $table->integer('user_id');

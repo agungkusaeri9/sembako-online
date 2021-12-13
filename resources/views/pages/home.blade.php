@@ -5,15 +5,11 @@
         <div class="col-md-12">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img style="height:400px" src="{{ asset('assets/image/home_banner_6-12_des_2021.jpg') }}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img style="height:400px" src="{{ asset('assets/image/Banner-toko-sembako-keren-1024x410.jpg') }}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img style="height:400px" src="{{ asset('assets/image/8606d9f80662ffe52de2039aea7bfdc1.png') }}" class="d-block w-100" alt="...">
-                  </div>
+                    @foreach ($sliders as $slider)
+                    <div class="carousel-item @if($slider->id == $sliders->first()->id) active @endif">
+                        <img style="height:400px" src="{{  $slider->image() }}" class="d-block w-100" alt="...">
+                      </div>
+                    @endforeach
                 </div>
                <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -29,13 +25,13 @@
     <section class="product">
         <div class="row mt-3">
             <div class="col-12">
-                <h5>Produk Terlaris</h5>
+                <h5>Anda mungkin suka</h5>
             </div>
         </div>
         <div class="row">
            @foreach ($best_seller as $best)
-            <div class="col-md-3">
-                <a href="">
+            <div class="col-md-3 mb-3">
+                <a href="{{ route('products.show', $best->slug) }}">
                     <div class="card" style="height:290px">
                         <img src="{{ $best->image() }}" class="card-img-top" alt="..." style="height:200px">
                         <div class="card-body">
@@ -47,6 +43,28 @@
             </div>
            @endforeach
         </div>
+    </section>
+    <section class="product">
+      <div class="row mt-3">
+        <div class="col-12">
+            <h5>Produk Lainnya</h5>
+        </div>
+    </div>
+    <div class="row">
+       @foreach ($lainnya as $lain)
+        <div class="col-md-3 mb-3">
+            <a href="{{ route('products.show', $lain->slug) }}">
+                <div class="card" style="height:290px">
+                    <img src="{{ $lain->image() }}" class="card-img-top" alt="..." style="height:200px">
+                    <div class="card-body">
+                        <h5 class="card-text text-dark">{{ $lain->name }}</h5>
+                        <h6 class="card-title text-dark">Rp. {{ number_format($lain->price) }}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+       @endforeach
+    </div>
     </section>
 </div>
 @endsection

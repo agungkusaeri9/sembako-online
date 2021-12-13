@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','HomeController@index')->name('home');
-Route::get('/products', 'ProductController@index')->name('products.index');
-Route::post('add-to-cart', 'CartController@store')->name('carts.store');
-Route::get('/{slug}', 'ProductController@show')->name('products.show');
+
 
 Auth::routes();
 
@@ -26,7 +23,10 @@ Route::middleware(['auth','isadmin'])->group(function () {
         Route::get('/','DashboardController')->name('dashboard');
         Route::resource('products',ProductController::class);
         Route::resource('banks',BankController::class);
+        Route::resource('sliders',SliderController::class)->except('show','edit','update');
+        Route::post('sliders/{id}/set-status','SliderController@setStatus')->name('sliders.set-status');
         Route::resource('users',UserController::class);
+        Route::resource('couriers',CourierController::class)->except('show');
         Route::get('profile','ProfileController@show')->name('profile');
         Route::post('profile','ProfileController@update')->name('profile.update');
         Route::get('transactions', 'TransactionController@index')->name('transactions.index');
@@ -35,3 +35,14 @@ Route::middleware(['auth','isadmin'])->group(function () {
         Route::get('transactions/{id}', 'TransactionController@show')->name('transactions.show');
     });
 });
+Route::get('/','HomeController@index')->name('home');
+Route::get('profile','ProfileController@index')->name('profile');
+Route::post('profile','ProfileController@update')->name('profile.update');
+Route::get('/products', 'ProductController@index')->name('products.index');
+Route::get('cart', 'CartController@index')->name('cart.index')->middleware('auth');
+Route::delete('cart/{id}', 'CartController@destroy')->name('cart.destroy')->middleware('auth');
+Route::post('add-to-cart', 'CartController@store')->name('carts.store')->middleware('auth');
+Route::post('checkout', 'CheckoutController')->name('checkout')->middleware('auth');
+Route::get('transaction', 'TransactionController@index')->name('transaction.index')->middleware('auth');
+Route::get('transaction/success/{code}', 'TransactionController@success')->name('transaction.success')->middleware('auth');
+Route::get('/{slug}', 'ProductController@show')->name('products.show');

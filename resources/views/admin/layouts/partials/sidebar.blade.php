@@ -48,10 +48,26 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.couriers.index') }}" class="nav-link">
+              <i class="nav-icon far fa-folder"></i>
+              <p>
+                Kurir
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.transactions.index') }}" class="nav-link">
               <i class="nav-icon far fa-folder"></i>
               <p>
                 Transaksi Masuk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.sliders.index') }}" class="nav-link">
+              <i class="nav-icon far fa-folder"></i>
+              <p>
+                Slider
               </p>
             </a>
           </li>

@@ -17,4 +17,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Bank::class,'bank_id','id');
     }
+
+    public function courier()
+    {
+        return $this->belongsTo(Courier::class,'courier_id','id');
+    }
 }

@@ -12,4 +12,10 @@ class Product extends Model
     {
         return asset('storage/' . $this->image);
     }
+
+    public function best()
+    {
+        return $this->hasMany(TransactionDetail::class,'product_id','id');
+    }
+
 }

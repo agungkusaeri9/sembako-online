@@ -1,10 +1,20 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if (session('success'))
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="alert alert-success">
+                <strong>Berhasil !</strong>
+                <p>{{ session('success') }}</p>
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row mt-3">
         <div class="col-md-6">
             <img src="{{ $item->image() }}" alt="{{ $item->name }}" class="img-fluid w-100">
-            <div class="detail">
+            <div class="detail mt-5">
                 <strong>Detail</strong>
                 <table class="small">
                     <tr>
